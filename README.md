@@ -1,9 +1,4 @@
 # Octo
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1z0vELj_lX9OWeoMG_WvXnQs43aPOEAhz?usp=sharing)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Static Badge](https://img.shields.io/badge/Project-Page-a)](https://<REDACTED>/)
-![](https://github.com/<REDACTED>/octo/workflows/run-debug/badge.svg)
-![](https://github.com/<REDACTED>/octo/workflows/pre-commit/badge.svg)
 
 This repo contains code for training and finetuning Octo generalist robotic policies (GRPs).
 Octo models are transformer-based diffusion policies, trained on a diverse mix of 800k robot trajectories.
