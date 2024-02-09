@@ -109,7 +109,7 @@ def get_config(config_string=None):
         dataset_kwargs=dict(
             oxe_kwargs=dict(
                 data_mix="oxe_magic_soup",
-                data_dir="gs://rail-octo-central2/resize_256_256",
+                data_dir="gs://<REDACTED>/resize_256_256",
                 load_camera_views=("primary", "wrist"),
                 load_depth=False,
             ),

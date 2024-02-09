@@ -1,4 +1,4 @@
-# Written by Dibya
+# Written by <REDACTED>
 from enum import Enum
 from fnmatch import fnmatch
 import logging

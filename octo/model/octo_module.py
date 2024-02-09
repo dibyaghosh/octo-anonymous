@@ -1,4 +1,4 @@
-# Written by Dibya
+# Written by <REDACTED>
 import logging
 from typing import Dict, Optional
 

@@ -24,7 +24,7 @@ def get_config(config_string="full,multimodal"):
         # Specifying this is only necessary if you want to predict > 1 step into the future
         "absolute_action_mask": [False, False, False, False, False, False, True],
         # standardize_fn is dynamically loaded from a file
-        # for example: "experiments/kevin/custom_standardization_transforms.py:aloha_dataset_transform"
+        # for example: "experiments/<REDACTED>/custom_standardization_transforms.py:aloha_dataset_transform"
         "standardize_fn": "octo/data/oxe/oxe_standardization_transforms.py:bridge_dataset_transform",
         # If the default data loading speed is too slow, try these:
         # "num_parallel_reads": 8,  # for reading from disk / GCS

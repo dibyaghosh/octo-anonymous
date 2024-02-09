@@ -56,7 +56,7 @@ def null_obs(img_size):
 class WidowXGym(gym.Env):
     """
     A Gym environment for the WidowX controller provided by:
-    https://github.com/rail-berkeley/bridge_data_robot
+    https://github.com/<REDACTED>/bridge_data_robot
     Needed to use Gym wrappers.
     """
 

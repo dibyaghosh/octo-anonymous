@@ -11,7 +11,7 @@ import torch
 from torch.utils.data import DataLoader
 import tqdm
 
-DATA_PATH = "gs://rail-orca-central2/resize_256_256"
+DATA_PATH = "gs://<REDACTED>/resize_256_256"
 
 tf.config.set_visible_devices([], "GPU")
 

@@ -1,4 +1,4 @@
-# copied from: https://raw.githubusercontent.com/rail-berkeley/bridge_data_v2/main/jaxrl_m/networks/diffusion_nets.py
+# copied from: https://raw.githubusercontent.com/<REDACTED>/bridge_data_v2/main/jaxrl_m/networks/diffusion_nets.py
 from typing import Callable, Optional, Sequence
 
 import flax.linen as nn

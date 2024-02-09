@@ -1,21 +1,20 @@
 # Octo
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1z0vELj_lX9OWeoMG_WvXnQs43aPOEAhz?usp=sharing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Static Badge](https://img.shields.io/badge/Project-Page-a)](https://octo-models.github.io/)
-![](https://github.com/rail-berkeley/octo/workflows/run-debug/badge.svg)
-![](https://github.com/rail-berkeley/octo/workflows/pre-commit/badge.svg)
+[![Static Badge](https://img.shields.io/badge/Project-Page-a)](https://<REDACTED>/)
+![](https://github.com/<REDACTED>/octo/workflows/run-debug/badge.svg)
+![](https://github.com/<REDACTED>/octo/workflows/pre-commit/badge.svg)
 
 This repo contains code for training and finetuning Octo generalist robotic policies (GRPs).
 Octo models are transformer-based diffusion policies, trained on a diverse mix of 800k robot trajectories.
 
 ## Get Started
 
-Follow the installation instructions, then load a pretrained Octo model! See [examples](examples/) for guides to zero-shot evaluation and finetuning and [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1z0vELj_lX9OWeoMG_WvXnQs43aPOEAhz?usp=sharing)
-for an inference example.
+Follow the installation instructions, then load a pretrained Octo model! See [examples](examples/) for guides to zero-shot evaluation and finetuning.
 
 ```python
 from octo.model.octo_model import OctoModel
-model = OctoModel.load_pretrained("hf://rail-berkeley/octo-base")
+model = OctoModel.load_pretrained("hf://<redacted>/octo-base")
 print(model.get_pretty_spec())
 ```
 
@@ -48,18 +47,18 @@ See the [Jax Github page](https://github.com/google/jax) for more details on ins
 
 Test the installation by finetuning on the debug dataset:
 ```bash
-python scripts/finetune.py --config.pretrained_path=hf://rail-berkeley/octo-small --debug
+python scripts/finetune.py --config.pretrained_path=hf://<redacted>/octo-small --debug
 ```
 
 ## Checkpoints
 
-You can find pretrained Octo checkpoints [here](https://huggingface.co/rail-berkeley).
+You can find pretrained Octo checkpoints [here](https://huggingface.co/<REDACTED>).
 At the moment we provide the following model versions:
 
 | Model                                                         | Inference on 1x NVIDIA 4090 | Size       |
 |---------------------------------------------------------------|-----------------------------|------------|
-| [Octo-Base](https://huggingface.co/rail-berkeley/octo-base)   | 13 it/sec                   | 93M Params |
-| [Octo-Small](https://huggingface.co/rail-berkeley/octo-small) | 17 it/sec                   | 27M Params |
+| [Octo-Base](https://huggingface.co/<REDACTED>/octo-base)   | 13 it/sec                   | 93M Params |
+| [Octo-Small](https://huggingface.co/<REDACTED>/octo-small) | 17 it/sec                   | 27M Params |
 
 
 ## Examples
@@ -85,8 +84,8 @@ python scripts/train.py --config scripts/configs/octo_pretrain_config.py:<size> 
 ```
 
 To download the pretraining dataset from the [Open X-Embodiment Dataset](https://robotics-transformer-x.github.io/),
-install the [rlds_dataset_mod package](https://github.com/kpertsch/rlds_dataset_mod)
-and run the [prepare_open_x.sh script](https://github.com/kpertsch/rlds_dataset_mod/blob/main/prepare_open_x.sh).
+install the [rlds_dataset_mod package](https://github.com/<REDACTED>/rlds_dataset_mod)
+and run the [prepare_open_x.sh script](https://github.com/<REDACTED>/rlds_dataset_mod/blob/main/prepare_open_x.sh).
 The total size of the pre-processed dataset is ~1.2TB.
 
 We run pretraining using a TPUv4-128 pod in 8 hours for the Octo-S model and in 14 hours for Octo-B.
@@ -99,7 +98,7 @@ We provide a [minimal example](examples/02_finetune_new_observation_action.py) f
 We also provide a more advanced finetuning script that allows you to change hyperparameters via a config file and logs finetuning
 metrics. To run advanced finetuning, use:
 ```bash
-python scripts/finetune.py --config.pretrained_path=hf://rail-berkeley/octo-small
+python scripts/finetune.py --config.pretrained_path=hf://<REDACTED>/octo-small
 ```
 
 We offer three finetuning modes depending on the parts of the model that are kept frozen: ```head_only```, ```head_mlp_only```, and ```full``` to finetune the full model.
@@ -114,7 +113,7 @@ Loading and running a trained Octo model is as easy as:
 ```python
 from octo.model import OctoModel
 
-model = OctoModel.load_pretrained("hf://rail-berkeley/octo-small")
+model = OctoModel.load_pretrained("hf://<REDACTED>/octo-small")
 task = model.create_tasks(texts=["pick up the spoon"])
 action = model.sample_action(observation, task, rng=jax.random.PRNGKey(0))
 ```
@@ -146,14 +145,3 @@ The `pad_mask` indicates which observations should be attended to, which is impo
 While `pad_mask` indicates which observations should be attended to on a timestep level, `pad_mask_dict` indicates which elements of the observation should be attended to within a single timestep. For example, for datasets without language labels, `pad_mask_dict["language_instruction"]` is set to `False`. For datasets without a wrist camera, `pad_mask_dict["image_wrist"]` is set to `False`. For convenience, if a key is missing from the observation dict, it is equivalent to setting `pad_mask_dict` to `False` for that key.
 #### Does `model.sample_actions([...])` return the full trajectory to solve a task?
 Octo was pretrained with an action chunking size of 4, meaning it predicts the next 4 actions at once. You can choose to execute all these actions before sampling new ones, or only execute the first action before sampling new ones (also known as receding horizon control). You can also do something more advanced like [temporal ensembling](octo/utils/gym_wrappers.py).
-
-## Citation
-
-```
-@misc{octo_2023,
-    title={Octo: An Open-Source Generalist Robot Policy},
-    author = {{Octo Model Team} and Dibya Ghosh and Homer Walke and Karl Pertsch and Kevin Black and Oier Mees and Sudeep Dasari and Joey Hejna and Charles Xu and Jianlan Luo and Tobias Kreiman and {You Liang} Tan and Dorsa Sadigh and Chelsea Finn and Sergey Levine},
-    howpublished  = {\url{https://octo-models.github.io}},
-    year = {2023},
-}
-```
